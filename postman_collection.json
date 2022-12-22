@@ -1,0 +1,453 @@
+{
+	"info": {
+		"_postman_id": "742594d3-094d-459f-afcb-5069ac74310b",
+		"name": "SharedHealthRecord",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Generate Sys Admin Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "local-shr-system-admin_auth_token",
+						"type": "default"
+					},
+					{
+						"key": "client_id",
+						"value": "18700",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "local-shr-system-admin@test.com",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8084/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Facility Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "local-facility-admin_auth_token",
+						"type": "default"
+					},
+					{
+						"key": "client_id",
+						"value": "18701",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "local-facility-admin@test.com",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8084/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Health IDs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token_admin}}",
+						"type": "default"
+					},
+					{
+						"key": "client_id",
+						"value": "18700",
+						"type": "default"
+					},
+					{
+						"key": "From",
+						"value": "local-shr-system-admin@test.com",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8086/healthIds/generateBlock?start=9800000100&totalHIDs=100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"healthIds",
+						"generateBlock"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "9800000100"
+						},
+						{
+							"key": "totalHIDs",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Patient",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token_facility}}",
+						"type": "default"
+					},
+					{
+						"key": "client_id",
+						"value": "18701",
+						"type": "default"
+					},
+					{
+						"key": "From",
+						"value": "local-facility-admin@test.com",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"given_name\": \"Atiq\",\n    \"sur_name\": \"Zaman\",\n    \"nid\": \"1666321725072\",\n    \"date_of_birth\": \"1991-07-14\",\n    \"gender\": \"M\",\n    \"present_address\": {\n        \"address_line\": \"Street 1, Baridhara village\",\n        \"division_id\": \"30\",\n        \"district_id\": \"26\",\n        \"upazila_id\": \"02\"\n    },\n    \"confidential\": \"No\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/patients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"patients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Patient",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token_facility}}",
+						"type": "default"
+					},
+					{
+						"key": "client_id",
+						"value": "18701",
+						"type": "default"
+					},
+					{
+						"key": "From",
+						"value": "local-facility-admin@test.com",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/api/v1/patients/98000101231",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"patients",
+						"98000101231"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Encounters",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token_facility}}",
+						"type": "default"
+					},
+					{
+						"key": "client_id",
+						"value": "18701",
+						"type": "default"
+					},
+					{
+						"key": "From",
+						"value": "local-facility-admin@test.com",
+						"type": "default"
+					},
+					{
+						"key": "Accept",
+						"value": "application/atom+xml",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8082/v2/patients/98000101231/encounters",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v2",
+						"patients",
+						"98000101231",
+						"encounters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Encounter (XML)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token_facility}}",
+						"type": "default"
+					},
+					{
+						"key": "client_id",
+						"value": "18701",
+						"type": "default"
+					},
+					{
+						"key": "From",
+						"value": "local-facility-admin@test.com",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<encounter>\n<content>\n<![CDATA[\n<Bundle xmlns=\"http://hl7.org/fhir\">\n    <id value=\"c820e3ea-d7a4-489a-9284-fbaaf0fe8e1a\"/>\n    <meta>\n        <lastUpdated value=\"2017-03-14T11:39:10.000+05:30\"/>\n    </meta>\n    <type value=\"collection\"/>\n    <entry>\n        <fullUrl value=\"urn:uuid:d1624f29-6962-4d15-9931-09dd5c85b9cf\"/>\n        <resource>\n            <MedicationRequest xmlns=\"http://hl7.org/fhir\">\n                <identifier>\n                    <value value=\"urn:uuid:14278c1c-95b4-43f0-aa35-66e366fb45dc\"/>\n                </identifier>\n                <status value=\"completed\" />\n                <!-- 0..1 active | on-hold | cancelled | completed | entered-in-error | stopped | draft | unknown -->\n                <intent value=\"plan\" />\n                <!-- 1..1 proposal | plan | order | instance-order -->\n                <category>\n                    <!-- 0..1 CodeableConcept Type of medication usage -->\n                </category>\n                <priority value=\"urgent\" />\n                <!-- 0..1 routine | urgent | stat | asap -->\n                <medicationCodeableConcept>\n                    <coding>\n                        <system value=\"http://localhost:9080/openmrs/ws/rest/v1/concept/7d78916a-74ae-11ed-b7b2-0242ac1a0004\"/>\n                        <code value=\"7d78916a-74ae-11ed-b7b2-0242ac1a0004\"/>\n                        <display value=\"Month\"/>\n                    </coding>\n                </medicationCodeableConcept>\n                <subject>\n                    <reference value=\"http://localhost:8081/api/default/patients/9800010123\"/>\n                    <display value=\"98000101231\"/>\n                </subject>\n                <reasonCode>\n                    <!-- 0..* CodeableConcept Reason or indication for writing the prescription -->\n                </reasonCode>\n                <reasonReference>\n                    <!-- 0..* Reference(Condition|Observation) Condition or Observation that supports why the prescription is being written -->\n                </reasonReference>\n            </MedicationRequest>\n        </resource>\n    </entry>\n</Bundle>\n]]>\n</content>\n</encounter>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/v2/patients/98000101231/encounters",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v2",
+						"patients",
+						"98000101231",
+						"encounters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Encounter Example",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token_facility}}",
+						"type": "default"
+					},
+					{
+						"key": "client_id",
+						"value": "18701",
+						"type": "default"
+					},
+					{
+						"key": "From",
+						"value": "local-facility-admin@test.com",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<encounter>\n<content>\n<![CDATA[\n<Bundle xmlns=\"http://hl7.org/fhir\">\n    <id value=\"c820e3ea-d7a4-489a-9284-fbaaf0fe8e1a\"/>\n    <meta>\n        <lastUpdated value=\"2017-03-14T11:39:10.000+05:30\"/>\n    </meta>\n    <type value=\"collection\"/>\n    <entry>\n        <fullUrl value=\"urn:uuid:d1624f29-6962-4d15-9931-09dd5c85b9cf\"/>\n        <resource>\n            <Composition xmlns=\"http://hl7.org/fhir\">\n                <identifier>\n                    <value value=\"urn:uuid:d1624f29-6962-4d15-9931-09dd5c85b9cf\"/>\n                </identifier>\n                <date value=\"2017-03-14T11:39:10.000+05:30\"/>\n                <type>\n                    <coding>\n                        <system value=\"http://hl7.org/fhir/vs/doc-typecodes\"/>\n                        <code value=\"51899-3\"/>\n                        <display value=\"Details Document\"/>\n                    </coding>\n                </type>\n                <title value=\"Patient Clinical Encounter\"/>\n                <status value=\"final\"/>\n                <confidentiality value=\"N\"/>\n                <subject>\n                    <reference value=\"http://localhost:8081/api/default/patients/98000101074\"/>\n                    <display value=\"98000101074\"/>\n                </subject>\n                <author>\n                    <reference value=\"http://identity-server:8080/facilities/10019842.json\"/>\n                </author>\n                <encounter>\n                    <reference value=\"urn:uuid:14278c1c-95b4-43f0-aa35-66e366fb45dc\"/>\n                </encounter>\n                <section>\n                    <entry>\n                        <reference value=\"urn:uuid:14278c1c-95b4-43f0-aa35-66e366fb45dc\"/>\n                        <display value=\"Encounter\"/>\n                    </entry>\n                </section>\n            </Composition>\n        </resource>\n    </entry>\n    <entry>\n        <fullUrl value=\"urn:uuid:14278c1c-95b4-43f0-aa35-66e366fb45dc\"/>\n        <resource>\n            <Encounter xmlns=\"http://hl7.org/fhir\">\n                <identifier>\n                    <value value=\"urn:uuid:14278c1c-95b4-43f0-aa35-66e366fb45dc\"/>\n                </identifier>\n                <status value=\"finished\"/>\n                <class value=\"field\"/>\n                <type>\n                    <coding>\n                        <system value=\"http://hl7.org/fhir/vs/doc-typecodes\"/>\n                        <code value=\"51899-3\"/>\n                        <display value=\"Details Document\"/>\n                    </coding>\n                </type>\n                <subject>\n                    <reference value=\"http://localhost:8081/api/default/patients/98000101074\"/>\n                    <display value=\"98000101074\"/>\n                </subject>\n                <patient>\n                    <reference value=\"http://localhost:8081/api/default/patients/98000101074\"/>\n                    <display value=\"98000101074\"/>\n                </patient>\n                <participant>\n                    <individual>\n                        <reference value=\"http://localhost:8084/api/1.0/providers/20.json\"/>\n                    </individual>\n                </participant>\n                <period>\n                    <start value=\"2017-03-14T11:38:52.000+05:30\"/>\n                </period>\n                <serviceProvider>\n                    <reference value=\"http://localhost:8084/api/1.0/facilities/10019842.json\"/>\n                </serviceProvider>\n            </Encounter>\n        </resource>\n    </entry>\n</Bundle>\n]]>\n</content>\n</encounter>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/v2/patients/98000101074/encounters/3d02262e-5d36-45ea-8ee1-34c32b6c2527",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v2",
+						"patients",
+						"98000101074",
+						"encounters",
+						"3d02262e-5d36-45ea-8ee1-34c32b6c2527"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Encounter (JSON)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "{{token_facility}}",
+						"type": "default"
+					},
+					{
+						"key": "client_id",
+						"value": "18701",
+						"type": "default"
+					},
+					{
+						"key": "From",
+						"value": "local-facility-admin@test.com",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"\\n\\n<Bundle xmlns=\\\"http://hl7.org/fhir\\\">\\n    <id value=\\\"c820e3ea-d7a4-489a-9284-fbaaf0fe8e1a\\\"/>\\n    <meta>\\n        <lastUpdated value=\\\"2017-03-14T11:39:10.000+05:30\\\"/>\\n    </meta>\\n    <type value=\\\"collection\\\"/>\\n    <entry>\\n        <fullUrl value=\\\"urn:uuid:d1624f29-6962-4d15-9931-09dd5c85b9cf\\\"/>\\n        <resource>\\n            <Composition xmlns=\\\"http://hl7.org/fhir\\\">\\n                <identifier>\\n                    <value value=\\\"urn:uuid:d1624f29-6962-4d15-9931-09dd5c85b9cf\\\"/>\\n                </identifier>\\n                <date value=\\\"2017-03-14T11:39:10.000+05:30\\\"/>\\n                <type>\\n                    <coding>\\n                        <system value=\\\"http://hl7.org/fhir/vs/doc-typecodes\\\"/>\\n                        <code value=\\\"51899-3\\\"/>\\n                        <display value=\\\"Details Document\\\"/>\\n                    </coding>\\n                </type>\\n                <title value=\\\"Patient Clinical Encounter\\\"/>\\n                <status value=\\\"final\\\"/>\\n                <confidentiality value=\\\"N\\\"/>\\n                <subject>\\n                    <reference value=\\\"http://localhost:8081/api/default/patients/98000100829\\\"/>\\n                    <display value=\\\"98000100829\\\"/>\\n                </subject>\\n                <author>\\n                    <reference value=\\\"http://identity-server:8080/facilities/10019842.json\\\"/>\\n                </author>\\n                <encounter>\\n                    <reference value=\\\"urn:uuid:14278c1c-95b4-43f0-aa35-66e366fb45dc\\\"/>\\n                </encounter>\\n                <section>\\n                    <entry>\\n                        <reference value=\\\"urn:uuid:14278c1c-95b4-43f0-aa35-66e366fb45dc\\\"/>\\n                        <display value=\\\"Encounter\\\"/>\\n                    </entry>\\n                </section>\\n            </Composition>\\n        </resource>\\n    </entry>\\n    <entry>\\n        <fullUrl value=\\\"urn:uuid:14278c1c-95b4-43f0-aa35-66e366fb45dc\\\"/>\\n        <resource>\\n            <Encounter xmlns=\\\"http://hl7.org/fhir\\\">\\n                <identifier>\\n                    <value value=\\\"urn:uuid:14278c1c-95b4-43f0-aa35-66e366fb45dc\\\"/>\\n                </identifier>\\n                <status value=\\\"finished\\\"/>\\n                <class value=\\\"field\\\"/>\\n                <type>\\n                    <coding>\\n                        <system value=\\\"http://hl7.org/fhir/vs/doc-typecodes\\\"/>\\n                        <code value=\\\"51899-3\\\"/>\\n                        <display value=\\\"Details Document\\\"/>\\n                    </coding>\\n                </type>\\n                <subject>\\n                    <reference value=\\\"http://localhost:8081/api/default/patients/98000100829\\\"/>\\n                    <display value=\\\"98000100829\\\"/>\\n                </subject>\\n                <patient>\\n                    <reference value=\\\"http://localhost:8081/api/default/patients/98000100829\\\"/>\\n                    <display value=\\\"98000100829\\\"/>\\n                </patient>\\n                <period>\\n                    <start value=\\\"2017-03-14T11:38:52.000+05:30\\\"/>\\n                </period>\\n            </Encounter>\\n        </resource>\\n    </entry>\\n</Bundle>\\n\\n\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/v2/patients/98000100829/encounters",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v2",
+						"patients",
+						"98000100829",
+						"encounters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch TR Concepts",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "Admin123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9080/openmrs/ws/rest/v1/concept",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"openmrs",
+						"ws",
+						"rest",
+						"v1",
+						"concept"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
