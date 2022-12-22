@@ -1,5 +1,5 @@
-# HIE-Docker
-Repository to contain docker configuration for all HIE Components
+# SHR Infrastructure
+Deploy Share Health Record Infrastructure
 
 ## Prerequisite
 * Docker
@@ -13,13 +13,12 @@ As of now this repo creates a docker-cluster of HIE with following configuration
 * Health Id Server Container
 * MCI Server Container
 
-By default this brings up a fresh terminology server. If there is tr-dump available which we want to start with, we can put the dump file at `mysql/tr-dump.sql`. This will bring up a TR, initialized with the given dump file. We would need to change the openmrs global_property `webservices.rest.uriPrefix` to `http://192.168.33.1:9080/openmrs` after startup.
+By default this brings up a fresh terminology server. If there is tr-dump available which we want to start with, we can put the dump file at `mysql/tr-dump.sql`. This will bring up a TR, initialized with the given dump file. We would need to change the openmrs global_property `webservices.rest.uriPrefix` to `http://localhost:9080/openmrs` after startup.
 
 
 ```
-git clone git@github.com:SharedHealth/HIE-Docker.git
-cd HIE-Docker
-./build-all-services.sh
+git clone git@github.com:SharedHealthRecord/Infrastructure.git
+cd Infrastructure
 ./create-shr-cluster.sh
 ```
 
