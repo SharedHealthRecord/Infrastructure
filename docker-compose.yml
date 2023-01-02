@@ -3,6 +3,8 @@ services:
   cassandra-seed-server:
     image: atiquzzaman/shr-cassandra-seed-server:latest
     container_name: cassandra-seed
+    ports:
+      - "9042:9042"
     environment:
       - CASSANDRA_SEEDS=cassandra-seed-server
       - CASSANDRA_CLUSTER_NAME=bdshr
