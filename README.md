@@ -24,7 +24,7 @@ git clone git@github.com:SharedHealthRecord/Infrastructure.git
 cd Infrastructure
 ./run-shr-cluster.sh
 ```
-On some OS, it will require to use the following command `sudo ./create-shr-cluster.sh`. The above script has used `docker compose` command. Depending on Docker version someone will need to change the command to `docker-compose`.
+On some OS, it will require to use the following command `sudo ./run-shr-cluster.sh`. The above script has used `docker compose` command. Depending on Docker version someone will need to change the command to `docker-compose`.
 
 
 We need to do below setup before we can start using these.
