@@ -3,7 +3,6 @@ Deploy Share Health Record Infrastructure
 
 ## Prerequisite
 * Docker
-* Git
 You can follow the following link to install Docker:
 https://docs.docker.com/engine/install/ubuntu/
 
