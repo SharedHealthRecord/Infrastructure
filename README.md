@@ -22,7 +22,7 @@ By default this brings up a fresh terminology server. If there is tr-dump availa
 ```
 git clone git@github.com:SharedHealthRecord/Infrastructure.git
 cd Infrastructure
-./create-shr-cluster.sh
+./run-shr-cluster.sh
 ```
 On some OS, it will require to use the following command `sudo ./create-shr-cluster.sh`. The above script has used `docker compose` command. Depending on Docker version someone will need to change the command to `docker-compose`.
 
