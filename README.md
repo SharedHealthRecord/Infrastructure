@@ -3,6 +3,9 @@ Deploy Share Health Record Infrastructure
 
 ## Prerequisite
 * Docker
+* Git
+You can follow the following link to install Docker:
+https://docs.docker.com/engine/install/ubuntu/
 
 ## How to use
 As of now this repo creates a docker-cluster of HIE with following configuration
@@ -21,6 +24,8 @@ git clone git@github.com:SharedHealthRecord/Infrastructure.git
 cd Infrastructure
 ./create-shr-cluster.sh
 ```
+On some OS, it will require to use the following command `sudo ./create-shr-cluster.sh`. The above script has used `docker compose` command. Depending on Docker version someone will need to change the command to `docker-compose`.
+
 
 We need to do below setup before we can start using these.
 
@@ -72,3 +77,4 @@ curl -X POST \
     "confidential": "No"
 }'
 ```
+Please follow the [link](https://sharedhealth.atlassian.net/wiki/spaces/docs/pages/48201741/MCI+Patient+Create+Validations) to know details about MCI Patient details field definitions.
